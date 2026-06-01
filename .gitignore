@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# Node
+node_modules/
+build/
+.env.local
+.env.production
+
+# Docker
+.dockerignore
+
+# DB
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
