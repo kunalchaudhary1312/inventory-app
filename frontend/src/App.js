@@ -10,28 +10,38 @@ import './App.css';
 export default function App() {
   return (
     <BrowserRouter>
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: '#fff',
+            color: '#1f2937',
+            border: '1px solid #dde3ea',
+            fontSize: '14px',
+          },
+        }}
+      />
       <div className="app">
         <aside className="sidebar">
           <div className="brand">
-            <span className="brand-icon">⬡</span>
-            <span className="brand-name">InvMS</span>
+            <div className="brand-name">Inventory Manager</div>
+            <div className="brand-tag">Order Management System</div>
           </div>
           <nav>
-            <NavLink to="/" end className={({isActive}) => isActive ? 'nav-link active' : 'nav-link'}>
-              <span>◈</span> Dashboard
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Dashboard
             </NavLink>
-            <NavLink to="/products" className={({isActive}) => isActive ? 'nav-link active' : 'nav-link'}>
-              <span>◉</span> Products
+            <NavLink to="/products" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Products
             </NavLink>
-            <NavLink to="/customers" className={({isActive}) => isActive ? 'nav-link active' : 'nav-link'}>
-              <span>◎</span> Customers
+            <NavLink to="/customers" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Customers
             </NavLink>
-            <NavLink to="/orders" className={({isActive}) => isActive ? 'nav-link active' : 'nav-link'}>
-              <span>◐</span> Orders
+            <NavLink to="/orders" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Orders
             </NavLink>
           </nav>
-          <div className="sidebar-footer">Inventory & Order System</div>
+          <div className="sidebar-footer">React + FastAPI</div>
         </aside>
         <main className="main-content">
           <Routes>

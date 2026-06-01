@@ -23,6 +23,19 @@ app.include_router(orders.router, prefix="/api/orders", tags=["Orders"])
 def root():
     return {"message": "Inventory & Order Management API is running"}
 
+@app.get("/api")
+def api_root():
+    return {
+        "message": "Inventory API",
+        "endpoints": {
+            "products": "/api/products/",
+            "customers": "/api/customers/",
+            "orders": "/api/orders/",
+            "docs": "/docs",
+            "health": "/health",
+        },
+    }
+
 @app.get("/health")
 def health():
     return {"status": "healthy"}

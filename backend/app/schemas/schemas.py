@@ -72,6 +72,7 @@ class OrderItemResponse(BaseModel):
 class OrderCreate(BaseModel):
     customer_id: int
     items: List[OrderItemCreate]
+    status: Optional[OrderStatus] = OrderStatus.confirmed
 
 class OrderUpdate(BaseModel):
     status: Optional[OrderStatus] = None

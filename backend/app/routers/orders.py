@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from app.core.database import get_db
-from app.models.models import Order, OrderItem, Product, Customer
+from app.models.models import Order, OrderItem, Product, Customer, OrderStatus
 from app.schemas.schemas import OrderCreate, OrderUpdate, Order as OrderSchema
 
 router = APIRouter()
@@ -36,8 +36,9 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)):
                 detail=f"Insufficient stock for '{product.name}'. Available: {product.stock}, Requested: {item.quantity}"
             )
 
-    # Create order
-    db_order = Order(customer_id=order.customer_id, total_amount=0.0)
+    # Create order (default status: confirmed)
+    order_status = OrderStatus(order.status.value) if order.status else OrderStatus.confirmed
+    db_order = Order(customer_id=order.customer_id, total_amount=0.0, status=order_status)
     db.add(db_order)
     db.flush()
 
@@ -65,8 +66,8 @@ def update_order(order_id: int, order: OrderUpdate, db: Session = Depends(get_db
     db_order = db.query(Order).filter(Order.id == order_id).first()
     if not db_order:
         raise HTTPException(status_code=404, detail="Order not found")
-    for key, value in order.dict(exclude_unset=True).items():
-        setattr(db_order, key, value)
+    if order.status is not None:
+        db_order.status = OrderStatus(order.status.value)
     db.commit()
     db.refresh(db_order)
     return db_order
