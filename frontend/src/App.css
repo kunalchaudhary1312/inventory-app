@@ -95,6 +95,7 @@ nav {
   color: var(--text-muted);
   padding: 12px 10px 0;
   border-top: 1px solid var(--border);
+  line-height: 1.6;
 }
 
 /* Main content */

@@ -41,7 +41,10 @@ export default function App() {
               Orders
             </NavLink>
           </nav>
-          <div className="sidebar-footer">React + FastAPI</div>
+          <div className="sidebar-footer">
+            <div>Kunal Chaudhary</div>
+            <div>Ethara.ai Assignment</div>
+          </div>
         </aside>
         <main className="main-content">
           <Routes>
